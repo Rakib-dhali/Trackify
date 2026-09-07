@@ -1,28 +1,44 @@
 "use client";
 
 import { useState } from "react";
-import { signUp } from "@/lib/auth-client";
+import { signUp, signIn } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { Mail, Lock, Eye, EyeOff, AlertCircle, Loader2, User, ShieldCheck } from "lucide-react";
+import { FcGoogle } from "react-icons/fc";
 
 export function SignUpForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+
+  const handleGoogleSignUp = async () => {
+    setError("");
+    setGoogleLoading(true);
+
+    try {
+      const result = await signIn.social({
+        provider: "google",
+        callbackURL: "/dashboard",
+      });
+
+      if (result?.error) {
+        setError(result.error.message ?? "Google sign up failed. Please try again.");
+        setGoogleLoading(false);
+      }
+    } catch {
+      setError("An unexpected error occurred during Google sign up.");
+      setGoogleLoading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
-    if (password !== confirmPassword) {
-      setError("Passwords do not match.");
-      return;
-    }
 
     if (password.length < 8) {
       setError("Password must be at least 8 characters.");
@@ -37,7 +53,7 @@ export function SignUpForm() {
       if (result.error) {
         setError(result.error.message ?? "Sign up failed. Please try again.");
       } else {
-        router.push("/");
+        router.push("/dashboard");
       }
     } catch {
       setError("An unexpected error occurred. Please try again.");
@@ -45,6 +61,8 @@ export function SignUpForm() {
       setLoading(false);
     }
   };
+
+  const isBusy = loading || googleLoading;
 
   return (
     <>
@@ -55,6 +73,35 @@ export function SignUpForm() {
           {error}
         </div>
       )}
+
+      {/* Google Button */}
+      <button
+        type="button"
+        onClick={handleGoogleSignUp}
+        disabled={isBusy}
+        className="w-full py-3 px-4 mb-5 bg-white/4 hover:bg-white/8 border border-white/8 hover:border-white/15 rounded-xl text-slate-100 text-sm font-medium transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+      >
+        {googleLoading ? (
+          <span className="flex items-center justify-center gap-2">
+            <Loader2 className="size-[18px] animate-spin text-violet-400" />
+            Connecting to Google...
+          </span>
+        ) : (
+          <>
+            <FcGoogle className="size-5" />
+            <span>Sign up with Google</span>
+          </>
+        )}
+      </button>
+
+      {/* Divider */}
+      <div className="relative flex items-center justify-center mb-5">
+        <div className="border-t border-white/[0.08] w-full" />
+        <span className="bg-transparent px-3 text-xs text-slate-400 uppercase tracking-wider font-medium shrink-0">
+          or continue with email
+        </span>
+        <div className="border-t border-white/[0.08] w-full" />
+      </div>
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -72,8 +119,9 @@ export function SignUpForm() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
+              disabled={isBusy}
               autoComplete="name"
-              className="w-full py-3 pl-11 pr-3.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-slate-100 text-sm outline-none placeholder:text-slate-600 transition-all duration-200 hover:border-white/[0.12] focus:bg-white/[0.06] focus:border-violet-500/50 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1),0_0_20px_rgba(139,92,246,0.05)]"
+              className="w-full py-3 pl-11 pr-3.5 bg-white/4 border border-white/[0.08] rounded-xl text-slate-100 text-sm outline-none placeholder:text-slate-600 transition-all duration-200 hover:border-white/[0.12] focus:bg-white/[0.06] focus:border-violet-500/50 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1),0_0_20px_rgba(139,92,246,0.05)] disabled:opacity-60"
             />
           </div>
         </div>
@@ -92,8 +140,9 @@ export function SignUpForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              disabled={isBusy}
               autoComplete="email"
-              className="w-full py-3 pl-11 pr-3.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-slate-100 text-sm outline-none placeholder:text-slate-600 transition-all duration-200 hover:border-white/[0.12] focus:bg-white/[0.06] focus:border-violet-500/50 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1),0_0_20px_rgba(139,92,246,0.05)]"
+              className="w-full py-3 pl-11 pr-3.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-slate-100 text-sm outline-none placeholder:text-slate-600 transition-all duration-200 hover:border-white/[0.12] focus:bg-white/[0.06] focus:border-violet-500/50 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1),0_0_20px_rgba(139,92,246,0.05)] disabled:opacity-60"
             />
           </div>
         </div>
@@ -112,9 +161,10 @@ export function SignUpForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              disabled={isBusy}
               autoComplete="new-password"
               minLength={8}
-              className="w-full py-3 pl-11 pr-11 bg-white/[0.04] border border-white/[0.08] rounded-xl text-slate-100 text-sm outline-none placeholder:text-slate-600 transition-all duration-200 hover:border-white/[0.12] focus:bg-white/[0.06] focus:border-violet-500/50 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1),0_0_20px_rgba(139,92,246,0.05)]"
+              className="w-full py-3 pl-11 pr-11 bg-white/[0.04] border border-white/[0.08] rounded-xl text-slate-100 text-sm outline-none placeholder:text-slate-600 transition-all duration-200 hover:border-white/[0.12] focus:bg-white/[0.06] focus:border-violet-500/50 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1),0_0_20px_rgba(139,92,246,0.05)] disabled:opacity-60"
             />
             <button
               type="button"
@@ -127,31 +177,10 @@ export function SignUpForm() {
           </div>
         </div>
 
-        {/* Confirm Password */}
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="signup-confirm-password" className="text-[0.8125rem] font-medium text-slate-300 pl-0.5">
-            Confirm password
-          </label>
-          <div className="relative flex items-center group">
-            <ShieldCheck className="absolute left-3.5 size-[18px] text-slate-500 pointer-events-none transition-colors group-focus-within:text-violet-400" />
-            <input
-              id="signup-confirm-password"
-              type={showPassword ? "text" : "password"}
-              placeholder="••••••••"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-              autoComplete="new-password"
-              minLength={8}
-              className="w-full py-3 pl-11 pr-3.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-slate-100 text-sm outline-none placeholder:text-slate-600 transition-all duration-200 hover:border-white/[0.12] focus:bg-white/[0.06] focus:border-violet-500/50 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1),0_0_20px_rgba(139,92,246,0.05)]"
-            />
-          </div>
-        </div>
-
         {/* Submit */}
         <button
           type="submit"
-          disabled={loading}
+          disabled={isBusy}
           className="w-full py-3 mt-2 bg-gradient-to-br from-indigo-500 to-violet-500 rounded-xl text-white text-[0.9375rem] font-semibold tracking-[0.01em] cursor-pointer transition-all duration-250 relative overflow-hidden hover:not-disabled:-translate-y-0.5 hover:not-disabled:shadow-[0_8px_25px_rgba(99,102,241,0.35),0_0_40px_rgba(139,92,246,0.15)] active:not-disabled:translate-y-0 disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {loading ? (

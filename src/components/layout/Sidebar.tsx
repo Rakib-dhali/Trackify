@@ -55,7 +55,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               <CheckSquare className="w-4 h-4 text-white" strokeWidth={2.5} />
             </div>
             <span className="text-lg font-bold text-white tracking-tight">
-              Hirebird
+              Trackify
             </span>
           </div>
           <button 
@@ -99,7 +99,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
         {/* Footer */}
         <div className="px-5 py-4 border-t border-slate-800 shrink-0">
-          <p className="text-xs text-slate-600">Hirebird v1.0</p>
+          <p className="text-xs text-slate-600">Trackify v1.0</p>
         </div>
       </aside>
     </>

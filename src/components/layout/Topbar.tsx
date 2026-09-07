@@ -24,7 +24,7 @@ export function Topbar({ onMenuClick }: TopbarProps) {
   const pageTitle =
     Object.entries(PAGE_TITLES).find(([key]) =>
       pathname.startsWith(key)
-    )?.[1] ?? "Hirebird";
+    )?.[1] ?? "Trackify";
 
   const handleSignOut = async () => {
     await signOut();

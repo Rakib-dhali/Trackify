@@ -70,7 +70,7 @@ function Navbar() {
           <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 shadow-md group-hover:shadow-indigo-500/20 transition-shadow">
             <CheckSquare className="w-4 h-4 text-white" strokeWidth={2.5} />
           </div>
-          <span className="text-lg font-bold text-slate-900 tracking-tight">Hirebird</span>
+          <span className="text-lg font-bold text-slate-900 tracking-tight">Trackify</span>
         </Link>
 
         {/* Desktop Links */}
@@ -211,7 +211,7 @@ function HeroSection() {
             transition={{ delay: 0.1 }}
             className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto mb-9"
           >
-            Hirebird gives you a visual pipeline, smart analytics, and contact tracking — all in one place.
+            Trackify gives you a visual pipeline, smart analytics, and contact tracking — all in one place.
           </motion.p>
 
           {/* Action Buttons */}
@@ -255,7 +255,7 @@ function HeroSection() {
             <div className="rounded-xl overflow-hidden border border-slate-100 bg-slate-900">
               <Image
                 src={scr}
-                alt="Hirebird kanban board UI mockup"
+                alt="Trackify kanban board UI mockup"
                 width={1200}
                 height={700}
                 className="w-full h-auto object-cover"
@@ -470,7 +470,7 @@ function CTASection() {
               Ready to take control of your job search?
             </h2>
             <p className="text-base sm:text-lg text-indigo-100/90 mb-8">
-              Join hundreds of job seekers already using Hirebird to organize their applications and land interviews faster.
+              Join hundreds of job seekers already using Trackify to organize their applications and land interviews faster.
             </p>
             <Link
               href="/sign-up"
@@ -499,7 +499,7 @@ function Footer() {
               <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600">
                 <CheckSquare className="w-3.5 h-3.5 text-white" strokeWidth={2.5} />
               </div>
-              <span className="text-base font-bold text-slate-900">Hirebird</span>
+              <span className="text-base font-bold text-slate-900">Trackify</span>
             </div>
             <span className="hidden sm:inline text-slate-300">•</span>
             <p className="text-xs text-slate-500">Track every application. Land your next job.</p>
@@ -526,7 +526,7 @@ function Footer() {
               <span>Portfolio</span>
             </a>
             <a
-              href="mailto:contact@hirebird.app"
+              href="mailto:contact@trackify.app"
               className="flex items-center gap-1.5 hover:text-indigo-600 transition-colors"
             >
               <Mail className="w-4 h-4 text-slate-500" />
@@ -536,7 +536,7 @@ function Footer() {
         </div>
 
         <div className="mt-8 pt-6 border-t border-slate-100 text-center">
-          <p className="text-xs text-slate-500">&copy; 2026 Hirebird. All rights reserved.</p>
+          <p className="text-xs text-slate-500">&copy; 2026 Trackify. All rights reserved.</p>
         </div>
       </div>
     </footer>

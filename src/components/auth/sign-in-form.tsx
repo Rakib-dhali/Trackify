@@ -4,14 +4,36 @@ import { useState } from "react";
 import { signIn } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { Mail, Lock, Eye, EyeOff, AlertCircle, Loader2 } from "lucide-react";
+import { FcGoogle } from "react-icons/fc";
 
 export function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+
+  const handleGoogleSignIn = async () => {
+    setError("");
+    setGoogleLoading(true);
+
+    try {
+      const result = await signIn.social({
+        provider: "google",
+        callbackURL: "/dashboard",
+      });
+
+      if (result?.error) {
+        setError(result.error.message ?? "Google sign in failed. Please try again.");
+        setGoogleLoading(false);
+      }
+    } catch {
+      setError("An unexpected error occurred during Google sign in.");
+      setGoogleLoading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,7 +46,7 @@ export function SignInForm() {
       if (result.error) {
         setError(result.error.message ?? "Sign in failed. Please try again.");
       } else {
-        router.push("/");
+        router.push("/dashboard");
       }
     } catch {
       setError("An unexpected error occurred. Please try again.");
@@ -32,6 +54,8 @@ export function SignInForm() {
       setLoading(false);
     }
   };
+
+  const isBusy = loading || googleLoading;
 
   return (
     <>
@@ -42,6 +66,35 @@ export function SignInForm() {
           {error}
         </div>
       )}
+
+      {/* Google Button */}
+      <button
+        type="button"
+        onClick={handleGoogleSignIn}
+        disabled={isBusy}
+        className="w-full py-3 px-4 mb-5 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/[0.15] rounded-xl text-slate-100 text-sm font-medium transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+      >
+        {googleLoading ? (
+          <span className="flex items-center justify-center gap-2">
+            <Loader2 className="size-[18px] animate-spin text-violet-400" />
+            Connecting to Google...
+          </span>
+        ) : (
+          <>
+            <FcGoogle className="size-5" />
+            <span>Sign in with Google</span>
+          </>
+        )}
+      </button>
+
+      {/* Divider */}
+      <div className="relative flex items-center justify-center mb-5">
+        <div className="border-t border-white/[0.08] w-full" />
+        <span className="bg-transparent px-3 text-xs text-slate-400 uppercase tracking-wider font-medium shrink-0">
+          or continue with email
+        </span>
+        <div className="border-t border-white/[0.08] w-full" />
+      </div>
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -59,8 +112,9 @@ export function SignInForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              disabled={isBusy}
               autoComplete="email"
-              className="w-full py-3 pl-11 pr-3.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-slate-100 text-sm outline-none placeholder:text-slate-600 transition-all duration-200 hover:border-white/[0.12] focus:bg-white/[0.06] focus:border-violet-500/50 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1),0_0_20px_rgba(139,92,246,0.05)]"
+              className="w-full py-3 pl-11 pr-3.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-slate-100 text-sm outline-none placeholder:text-slate-600 transition-all duration-200 hover:border-white/[0.12] focus:bg-white/[0.06] focus:border-violet-500/50 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1),0_0_20px_rgba(139,92,246,0.05)] disabled:opacity-60"
             />
           </div>
         </div>
@@ -79,9 +133,10 @@ export function SignInForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              disabled={isBusy}
               autoComplete="current-password"
               minLength={8}
-              className="w-full py-3 pl-11 pr-11 bg-white/[0.04] border border-white/[0.08] rounded-xl text-slate-100 text-sm outline-none placeholder:text-slate-600 transition-all duration-200 hover:border-white/[0.12] focus:bg-white/[0.06] focus:border-violet-500/50 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1),0_0_20px_rgba(139,92,246,0.05)]"
+              className="w-full py-3 pl-11 pr-11 bg-white/[0.04] border border-white/[0.08] rounded-xl text-slate-100 text-sm outline-none placeholder:text-slate-600 transition-all duration-200 hover:border-white/[0.12] focus:bg-white/[0.06] focus:border-violet-500/50 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1),0_0_20px_rgba(139,92,246,0.05)] disabled:opacity-60"
             />
             <button
               type="button"
@@ -97,7 +152,7 @@ export function SignInForm() {
         {/* Submit */}
         <button
           type="submit"
-          disabled={loading}
+          disabled={isBusy}
           className="w-full py-3 mt-2 bg-gradient-to-br from-indigo-500 to-violet-500 rounded-xl text-white text-[0.9375rem] font-semibold tracking-[0.01em] cursor-pointer transition-all duration-250 relative overflow-hidden hover:not-disabled:-translate-y-0.5 hover:not-disabled:shadow-[0_8px_25px_rgba(99,102,241,0.35),0_0_40px_rgba(139,92,246,0.15)] active:not-disabled:translate-y-0 disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {loading ? (
