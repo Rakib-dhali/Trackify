@@ -38,6 +38,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
       salaryMin: body.salaryMin,
       salaryMax: body.salaryMax,
       source: body.source,
+      jobDescription: body.jobDescription,
     },
   })
 

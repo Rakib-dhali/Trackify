@@ -18,6 +18,7 @@ import {
   X,
 } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import scr from "@/assets/scr.png"
 
 /* ─────────────────────────────── Animations ─────────────────────────────── */
@@ -60,7 +61,7 @@ function Navbar() {
       transition={{ duration: 0.4 }}
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/40 backdrop-blur-md border-b border-slate-200/80 shadow-sm"
+          ? "bg-white/40 dark:bg-slate-900/60 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-700/80 shadow-sm"
           : "bg-transparent"
       }`}
     >
@@ -70,25 +71,26 @@ function Navbar() {
           <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 shadow-md group-hover:shadow-indigo-500/20 transition-shadow">
             <CheckSquare className="w-4 h-4 text-white" strokeWidth={2.5} />
           </div>
-          <span className="text-lg font-bold text-slate-900 tracking-tight">Trackify</span>
+          <span className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">Trackify</span>
         </Link>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
-          <a href="#features" className="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">
+          <a href="#features" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
             Features
           </a>
-          <a href="#how-it-works" className="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">
+          <a href="#how-it-works" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
             How it works
           </a>
-          <a href="#pricing" className="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors">
+          <a href="#pricing" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
             Pricing
           </a>
         </div>
 
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <Link href="/sign-in" className="text-sm font-semibold text-slate-700 hover:text-indigo-600 transition-colors px-3 py-2">
+          <ThemeToggle />
+          <Link href="/sign-in" className="text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors px-3 py-2">
             Sign in
           </Link>
           <Link
@@ -101,13 +103,16 @@ function Navbar() {
         </div>
 
         {/* Mobile Toggle */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg"
-          aria-label="Toggle Menu"
-        >
-          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="p-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg"
+            aria-label="Toggle Menu"
+          >
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -116,33 +121,33 @@ function Navbar() {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden bg-white border-b border-slate-200 px-6 pb-6 space-y-3 shadow-lg"
+          className="md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 px-6 pb-6 space-y-3 shadow-lg"
         >
           <a
             href="#features"
             onClick={() => setMobileOpen(false)}
-            className="block text-sm font-medium text-slate-600 hover:text-indigo-600 py-2 border-b border-slate-100"
+            className="block text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 py-2 border-b border-slate-100 dark:border-slate-800"
           >
             Features
           </a>
           <a
             href="#how-it-works"
             onClick={() => setMobileOpen(false)}
-            className="block text-sm font-medium text-slate-600 hover:text-indigo-600 py-2 border-b border-slate-100"
+            className="block text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 py-2 border-b border-slate-100 dark:border-slate-800"
           >
             How it works
           </a>
           <a
             href="#pricing"
             onClick={() => setMobileOpen(false)}
-            className="block text-sm font-medium text-slate-600 hover:text-indigo-600 py-2 border-b border-slate-100"
+            className="block text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 py-2 border-b border-slate-100 dark:border-slate-800"
           >
             Pricing
           </a>
           <div className="flex flex-col gap-2.5 pt-2">
             <Link
               href="/sign-in"
-              className="text-center text-sm font-semibold text-slate-700 hover:text-indigo-600 py-2 rounded-lg border border-slate-200"
+              className="text-center text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 py-2 rounded-lg border border-slate-200 dark:border-slate-700"
             >
               Sign in
             </Link>
@@ -164,10 +169,10 @@ function Navbar() {
 
 function HeroSection() {
   return (
-    <section className="relative bg-slate-50 pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden">
+    <section className="relative bg-slate-50 dark:bg-slate-950 pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden">
       {/* Subtle Grid background */}
       <div
-        className="absolute inset-0 opacity-[0.4]"
+        className="absolute inset-0 opacity-[0.4] dark:opacity-[0.15]"
         style={{
           backgroundImage: `radial-gradient(#cbd5e1 1px, transparent 1px)`,
           backgroundSize: `24px 24px`,
@@ -175,7 +180,7 @@ function HeroSection() {
       />
 
       {/* Decorative gradient blur */}
-      <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-indigo-200/50 via-violet-200/30 to-purple-200/40 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-indigo-200/50 via-violet-200/30 to-purple-200/40 dark:from-indigo-900/30 dark:via-violet-900/20 dark:to-purple-900/25 blur-[100px] rounded-full pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto mb-14">
@@ -184,9 +189,9 @@ function HeroSection() {
             variants={fadeIn}
             initial="hidden"
             animate="visible"
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-700 text-xs font-semibold mb-6 shadow-xs"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-200 dark:border-indigo-800 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-semibold mb-6 shadow-xs"
           >
-            <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
+            <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
             <span>Track every application. Land your next job.</span>
           </motion.div>
 
@@ -195,10 +200,10 @@ function HeroSection() {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15] mb-6"
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.15] mb-6"
           >
             Stop losing track of your{" "}
-            <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 dark:from-indigo-400 dark:via-violet-400 dark:to-purple-400 bg-clip-text text-transparent">
               job applications
             </span>
           </motion.h1>
@@ -209,7 +214,7 @@ function HeroSection() {
             initial="hidden"
             animate="visible"
             transition={{ delay: 0.1 }}
-            className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto mb-9"
+            className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto mb-9"
           >
             Trackify gives you a visual pipeline, smart analytics, and contact tracking — all in one place.
           </motion.p>
@@ -231,10 +236,10 @@ function HeroSection() {
             </Link>
             <a
               href="#how-it-works"
-              className="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 text-sm font-semibold text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 rounded-xl shadow-xs transition-all"
+              className="flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 text-sm font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600 rounded-xl shadow-xs transition-all"
             >
               <span>See how it works</span>
-              <ChevronRight className="w-4 h-4 text-slate-400" />
+              <ChevronRight className="w-4 h-4 text-slate-400 dark:text-slate-500" />
             </a>
           </motion.div>
         </div>
@@ -251,8 +256,8 @@ function HeroSection() {
           <div className="absolute -inset-2 rounded-2xl bg-gradient-to-r from-indigo-500/10 via-violet-500/10 to-purple-500/10 blur-xl" />
 
           {/* Screenshot Card Container */}
-          <div className="relative rounded-2xl bg-white p-2 border border-slate-200/90 shadow-2xl shadow-slate-900/10">
-            <div className="rounded-xl overflow-hidden border border-slate-100 bg-slate-900">
+          <div className="relative rounded-2xl bg-white dark:bg-slate-800 p-2 border border-slate-200/90 dark:border-slate-700/90 shadow-2xl shadow-slate-900/10 dark:shadow-black/30">
+            <div className="rounded-xl overflow-hidden border border-slate-100 dark:border-slate-700 bg-slate-900">
               <Image
                 src={scr}
                 alt="Trackify kanban board UI mockup"
@@ -276,25 +281,25 @@ const FEATURES = [
     icon: Kanban,
     title: "Kanban Pipeline",
     description: "Drag and drop applications through every stage of your hiring process.",
-    iconBg: "bg-indigo-50 text-indigo-600 border border-indigo-100",
+    iconBg: "bg-indigo-50 text-indigo-600 border border-indigo-100 dark:bg-indigo-950/50 dark:text-indigo-400 dark:border-indigo-900",
   },
   {
     icon: BarChart3,
     title: "Analytics Dashboard",
     description: "See your response rate, weekly trends, and best performing job sources.",
-    iconBg: "bg-violet-50 text-violet-600 border border-violet-100",
+    iconBg: "bg-violet-50 text-violet-600 border border-violet-100 dark:bg-violet-950/50 dark:text-violet-400 dark:border-violet-900",
   },
   {
     icon: Users,
     title: "Contact Tracking",
     description: "Save recruiter details against every application so nothing slips through.",
-    iconBg: "bg-purple-50 text-purple-600 border border-purple-100",
+    iconBg: "bg-purple-50 text-purple-600 border border-purple-100 dark:bg-purple-950/50 dark:text-purple-400 dark:border-purple-900",
   },
 ];
 
 function FeaturesSection() {
   return (
-    <section id="features" className="relative bg-white py-20 sm:py-28 border-t border-slate-200/60">
+    <section id="features" className="relative bg-white dark:bg-slate-900 py-20 sm:py-28 border-t border-slate-200/60 dark:border-slate-800/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Title */}
         <motion.div
@@ -304,13 +309,13 @@ function FeaturesSection() {
           viewport={{ once: true, amount: 0.3 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
+          <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-3 py-1 rounded-full border border-indigo-100 dark:border-indigo-800">
             Features
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-4">
             Everything you need to stay organized
           </h2>
-          <p className="text-slate-600 mt-3 text-base">
+          <p className="text-slate-600 dark:text-slate-400 mt-3 text-base">
             Take total control of your job search with intuitive tools designed for modern applicants.
           </p>
         </motion.div>
@@ -327,15 +332,15 @@ function FeaturesSection() {
             <motion.div
               key={f.title}
               variants={fadeUp}
-              className="bg-white border border-slate-200 rounded-2xl p-7 shadow-xs hover:shadow-md hover:border-indigo-200 transition-all duration-200 flex flex-col group"
+              className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-7 shadow-xs hover:shadow-md dark:hover:shadow-slate-900/50 hover:border-indigo-200 dark:hover:border-indigo-800 transition-all duration-200 flex flex-col group"
             >
               <div
                 className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${f.iconBg} mb-5 group-hover:scale-105 transition-transform`}
               >
                 <f.icon className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">{f.title}</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">{f.description}</p>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{f.title}</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{f.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -366,7 +371,7 @@ const STEPS = [
 
 function HowItWorksSection() {
   return (
-    <section id="how-it-works" className="relative bg-slate-50 py-20 sm:py-28 border-t border-slate-200/60">
+    <section id="how-it-works" className="relative bg-slate-50 dark:bg-slate-950 py-20 sm:py-28 border-t border-slate-200/60 dark:border-slate-800/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Section Title */}
         <motion.div
@@ -376,10 +381,10 @@ function HowItWorksSection() {
           viewport={{ once: true, amount: 0.3 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
+          <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-3 py-1 rounded-full border border-indigo-100 dark:border-indigo-800">
             Simple Process
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-4">
             Get started in 3 steps
           </h2>
         </motion.div>
@@ -396,14 +401,14 @@ function HowItWorksSection() {
             <motion.div
               key={s.step}
               variants={fadeUp}
-              className="bg-white border border-slate-200 rounded-2xl p-7 shadow-xs relative flex flex-col items-start"
+              className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-7 shadow-xs relative flex flex-col items-start"
             >
               {/* Number Badge */}
               <div className="w-10 h-10 rounded-xl bg-indigo-600 text-white font-bold text-base flex items-center justify-center mb-5 shadow-sm">
                 {s.step}
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">{s.title}</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">{s.description}</p>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{s.title}</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{s.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -452,7 +457,7 @@ function StatsSection() {
 
 function CTASection() {
   return (
-    <section className="relative bg-slate-50 py-20 sm:py-28 border-t border-slate-200/60">
+    <section className="relative bg-slate-50 dark:bg-slate-950 py-20 sm:py-28 border-t border-slate-200/60 dark:border-slate-800/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <motion.div
           variants={fadeUp}
@@ -490,7 +495,7 @@ function CTASection() {
 
 function Footer() {
   return (
-    <footer className="bg-white border-t border-slate-200 py-12">
+    <footer className="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo + tagline */}
@@ -499,44 +504,44 @@ function Footer() {
               <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600">
                 <CheckSquare className="w-3.5 h-3.5 text-white" strokeWidth={2.5} />
               </div>
-              <span className="text-base font-bold text-slate-900">Trackify</span>
+              <span className="text-base font-bold text-slate-900 dark:text-white">Trackify</span>
             </div>
-            <span className="hidden sm:inline text-slate-300">•</span>
-            <p className="text-xs text-slate-500">Track every application. Land your next job.</p>
+            <span className="hidden sm:inline text-slate-300 dark:text-slate-600">•</span>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Track every application. Land your next job.</p>
           </div>
 
           {/* Links */}
-          <div className="flex items-center gap-6 text-sm font-medium text-slate-600">
+          <div className="flex items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-400">
             <a
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 hover:text-indigo-600 transition-colors"
+              className="flex items-center gap-1.5 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
             >
-              <FaGithub className="w-4 h-4 text-slate-500" />
+              <FaGithub className="w-4 h-4 text-slate-500 dark:text-slate-400" />
               <span>GitHub</span>
             </a>
             <a
               href="https://rakibul.is-a.dev"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 hover:text-indigo-600 transition-colors"
+              className="flex items-center gap-1.5 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
             >
-              <Globe className="w-4 h-4 text-slate-500" />
+              <Globe className="w-4 h-4 text-slate-500 dark:text-slate-400" />
               <span>Portfolio</span>
             </a>
             <a
               href="mailto:contact@trackify.app"
-              className="flex items-center gap-1.5 hover:text-indigo-600 transition-colors"
+              className="flex items-center gap-1.5 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
             >
-              <Mail className="w-4 h-4 text-slate-500" />
+              <Mail className="w-4 h-4 text-slate-500 dark:text-slate-400" />
               <span>Contact</span>
             </a>
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-slate-100 text-center">
-          <p className="text-xs text-slate-500">&copy; 2026 Trackify. All rights reserved.</p>
+        <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 text-center">
+          <p className="text-xs text-slate-500 dark:text-slate-500">&copy; 2026 Trackify. All rights reserved.</p>
         </div>
       </div>
     </footer>
@@ -547,7 +552,7 @@ function Footer() {
 
 export default function LandingPage() {
   return (
-    <div className="bg-slate-50 text-slate-900 min-h-screen">
+    <div className="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen">
       <Navbar />
       <HeroSection />
       <FeaturesSection />

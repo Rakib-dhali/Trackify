@@ -60,6 +60,7 @@ export default function ApplicationDetailPage() {
   const [salaryMin, setSalaryMin] = useState("");
   const [salaryMax, setSalaryMax] = useState("");
   const [source, setSource] = useState<ApplicationSource>("LinkedIn");
+  const [jobDescription, setJobDescription] = useState("");
   const [status, setStatus] = useState<ApplicationStatus>("APPLIED");
 
   // Contact form states
@@ -106,6 +107,7 @@ export default function ApplicationDetailPage() {
     setSalaryMin(application.salaryMin?.toString() || "");
     setSalaryMax(application.salaryMax?.toString() || "");
     setSource((application.source as ApplicationSource) || "LinkedIn");
+    setJobDescription(application.jobDescription || "");
     setStatus(application.currentStatus);
     setIsEditing(true);
   };
@@ -117,6 +119,7 @@ export default function ApplicationDetailPage() {
       salaryMin: salaryMin ? parseInt(salaryMin, 10) : undefined,
       salaryMax: salaryMax ? parseInt(salaryMax, 10) : undefined,
       source,
+      jobDescription: jobDescription || undefined,
     });
 
     // If status changed, update it separately via the status API
@@ -322,6 +325,15 @@ export default function ApplicationDetailPage() {
                 ))}
               </select>
             </div>
+            <div className="flex flex-col gap-1 md:col-span-2">
+              <label className="text-xs font-semibold text-slate-600">Job Description</label>
+              <textarea
+                value={jobDescription}
+                onChange={(e) => setJobDescription(e.target.value)}
+                placeholder="Paste job description here..."
+                className="px-3 py-2 border border-slate-200 rounded-lg text-sm min-h-[100px] resize-y"
+              />
+            </div>
           </div>
         )}
 
@@ -364,6 +376,14 @@ export default function ApplicationDetailPage() {
                 {formatDate(application.updatedAt)}
               </p>
             </div>
+            {application.jobDescription && (
+              <div className="col-span-2 sm:col-span-4 mt-2">
+                <p className="text-xs text-slate-400 mb-1">Job Description</p>
+                <div className="text-sm text-slate-700 bg-slate-50 p-4 rounded-lg border border-slate-100 whitespace-pre-wrap max-h-[300px] overflow-y-auto">
+                  {application.jobDescription}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -34,6 +34,7 @@ interface ApplicationStore {
       salaryMin?: number;
       salaryMax?: number;
       source?: string;
+      jobDescription?: string;
     }
   ) => Promise<void>;
   deleteApplication: (id: string) => Promise<void>;

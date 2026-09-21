@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Application } from "@/types";
+import { useThemeStore } from "@/store/useThemeStore";
 
 interface WeeklyBarChartProps {
   applications: Application[];
@@ -35,6 +36,9 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
 }
 
 export function WeeklyBarChart({ applications }: WeeklyBarChartProps) {
+  const theme = useThemeStore((s) => s.theme);
+  const isDark = theme === "dark";
+
   const data = useMemo(() => {
     const weeks = [];
     const now = new Date();
@@ -64,12 +68,12 @@ export function WeeklyBarChart({ applications }: WeeklyBarChartProps) {
   }, [applications]);
 
   return (
-    <div className="bg-white rounded-xl border border-slate-200 p-5">
+    <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-5">
       <div className="mb-4">
-        <h3 className="text-sm font-semibold text-slate-700">
+        <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-200">
           Weekly Applications
         </h3>
-        <p className="text-xs text-slate-400 mt-0.5">
+        <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">
           Applications sent over the last 8 weeks
         </p>
       </div>
@@ -79,20 +83,20 @@ export function WeeklyBarChart({ applications }: WeeklyBarChartProps) {
           margin={{ top: 4, right: 4, left: -20, bottom: 0 }}
           barSize={24}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke={isDark ? "#334155" : "#f1f5f9"} vertical={false} />
           <XAxis
             dataKey="week"
-            tick={{ fontSize: 11, fill: "#94a3b8" }}
+            tick={{ fontSize: 11, fill: isDark ? "#64748b" : "#94a3b8" }}
             axisLine={false}
             tickLine={false}
           />
           <YAxis
-            tick={{ fontSize: 11, fill: "#94a3b8" }}
+            tick={{ fontSize: 11, fill: isDark ? "#64748b" : "#94a3b8" }}
             axisLine={false}
             tickLine={false}
             allowDecimals={false}
           />
-          <Tooltip content={<CustomTooltip />} cursor={{ fill: "#f1f5f9" }} />
+          <Tooltip content={<CustomTooltip />} cursor={{ fill: isDark ? "#1e293b" : "#f1f5f9" }} />
           <Bar
             dataKey="applications"
             fill="url(#barGradient)"

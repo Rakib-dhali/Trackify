@@ -21,15 +21,15 @@ export function StatCard({
   trend,
 }: StatCardProps) {
   return (
-    <div className="bg-white rounded-xl border border-slate-200 p-5 flex flex-col gap-4 hover:shadow-md transition-shadow">
+    <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-5 flex flex-col gap-4 hover:shadow-md dark:hover:shadow-slate-900/50 transition-shadow">
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm text-slate-500 font-medium">{title}</p>
-          <p className="text-3xl font-bold text-slate-800 mt-1 tracking-tight">
+          <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">{title}</p>
+          <p className="text-3xl font-bold text-slate-800 dark:text-white mt-1 tracking-tight">
             {value}
           </p>
           {subtitle && (
-            <p className="text-xs text-slate-400 mt-0.5">{subtitle}</p>
+            <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">{subtitle}</p>
           )}
         </div>
         <div className={cn("p-2.5 rounded-lg", iconBg)}>
@@ -38,16 +38,16 @@ export function StatCard({
       </div>
 
       {trend && (
-        <div className="flex items-center gap-1.5 pt-1 border-t border-slate-100">
+        <div className="flex items-center gap-1.5 pt-1 border-t border-slate-100 dark:border-slate-700">
           <span
             className={cn(
               "text-xs font-semibold",
-              trend.positive ? "text-green-600" : "text-red-500"
+              trend.positive ? "text-green-600 dark:text-green-400" : "text-red-500 dark:text-red-400"
             )}
           >
             {trend.positive ? "↑" : "↓"} {trend.value}
           </span>
-          <span className="text-xs text-slate-400">vs. last month</span>
+          <span className="text-xs text-slate-400 dark:text-slate-500">vs. last month</span>
         </div>
       )}
     </div>

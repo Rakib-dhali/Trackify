@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
   if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
   const body = await req.json()
-  const { role, jobUrl, salaryMin, salaryMax, source, companyName, companyWebsite } = body
+  const { role, jobUrl, salaryMin, salaryMax, source, jobDescription, companyName, companyWebsite } = body
 
   // upsert company — avoid duplicates
   const company = await prisma.company.upsert({
@@ -45,6 +45,7 @@ export async function POST(req: NextRequest) {
       salaryMin,
       salaryMax,
       source,
+      jobDescription,
       currentStatus: 'APPLIED',
       statusHistory: {
         create: { status: 'APPLIED' }, // first history entry

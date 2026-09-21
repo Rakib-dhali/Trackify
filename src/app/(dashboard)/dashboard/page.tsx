@@ -50,20 +50,20 @@ export default function DashboardPage() {
           {Array.from({ length: 4 }).map((_, i) => (
             <div
               key={i}
-              className="bg-white rounded-xl border border-slate-200 p-5 h-32 animate-pulse"
+              className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-5 h-32 animate-pulse"
             >
-              <div className="h-3 w-24 bg-slate-200 rounded mb-3" />
-              <div className="h-8 w-16 bg-slate-200 rounded mb-2" />
-              <div className="h-2 w-20 bg-slate-100 rounded" />
+              <div className="h-3 w-24 bg-slate-200 dark:bg-slate-700 rounded mb-3" />
+              <div className="h-8 w-16 bg-slate-200 dark:bg-slate-700 rounded mb-2" />
+              <div className="h-2 w-20 bg-slate-100 dark:bg-slate-600 rounded" />
             </div>
           ))}
         </div>
         {/* Skeleton charts */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-          <div className="lg:col-span-3 bg-white rounded-xl border border-slate-200 h-72 animate-pulse" />
-          <div className="lg:col-span-2 bg-white rounded-xl border border-slate-200 h-72 animate-pulse" />
+          <div className="lg:col-span-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 h-72 animate-pulse" />
+          <div className="lg:col-span-2 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 h-72 animate-pulse" />
         </div>
-        <div className="bg-white rounded-xl border border-slate-200 h-48 animate-pulse" />
+        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 h-48 animate-pulse" />
       </div>
     );
   }
@@ -78,7 +78,7 @@ export default function DashboardPage() {
           subtitle="All time"
           icon={Briefcase}
           iconColor="text-indigo-600"
-          iconBg="bg-indigo-50"
+          iconBg="bg-indigo-50 dark:bg-indigo-950/50"
         />
         <StatCard
           title="Response Rate"
@@ -86,7 +86,7 @@ export default function DashboardPage() {
           subtitle="Excluding ghosted"
           icon={MessageSquare}
           iconColor="text-cyan-600"
-          iconBg="bg-cyan-50"
+          iconBg="bg-cyan-50 dark:bg-cyan-950/50"
         />
         <StatCard
           title="Active Interviews"
@@ -94,7 +94,7 @@ export default function DashboardPage() {
           subtitle="In progress now"
           icon={Users}
           iconColor="text-purple-600"
-          iconBg="bg-purple-50"
+          iconBg="bg-purple-50 dark:bg-purple-950/50"
         />
         <StatCard
           title="Offers Received"
@@ -102,7 +102,7 @@ export default function DashboardPage() {
           subtitle={offers === 1 ? "1 open offer" : `${offers} open offers`}
           icon={Trophy}
           iconColor="text-green-600"
-          iconBg="bg-green-50"
+          iconBg="bg-green-50 dark:bg-green-950/50"
         />
       </div>
 

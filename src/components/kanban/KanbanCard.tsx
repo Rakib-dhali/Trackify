@@ -11,14 +11,14 @@ import { formatDate, formatSalary } from "@/lib/utils";
 import { ExternalLink, MapPin, Calendar } from "lucide-react";
 
 const SOURCE_BADGE_COLORS: Record<string, string> = {
-  LinkedIn: "bg-blue-50 text-blue-700",
-  Indeed: "bg-orange-50 text-orange-700",
-  Arc: "bg-violet-50 text-violet-700",
-  AngelList: "bg-amber-50 text-amber-700",
-  Glassdoor: "bg-green-50 text-green-700",
-  Referral: "bg-emerald-50 text-emerald-700",
-  "Company Website": "bg-slate-100 text-slate-600",
-  Other: "bg-gray-100 text-gray-600",
+  LinkedIn: "bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300",
+  Indeed: "bg-orange-50 text-orange-700 dark:bg-orange-950/50 dark:text-orange-300",
+  Arc: "bg-violet-50 text-violet-700 dark:bg-violet-950/50 dark:text-violet-300",
+  AngelList: "bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300",
+  Glassdoor: "bg-green-50 text-green-700 dark:bg-green-950/50 dark:text-green-300",
+  Referral: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300",
+  "Company Website": "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300",
+  Other: "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300",
 };
 
 interface KanbanCardViewProps {
@@ -35,7 +35,7 @@ export const KanbanCardView = forwardRef<HTMLDivElement, KanbanCardViewProps>(
     const router = useRouter();
     const salary = formatSalary(application.salaryMin, application.salaryMax);
     const sourceBadge =
-      SOURCE_BADGE_COLORS[application.source ?? ""] ?? "bg-gray-100 text-gray-600";
+      SOURCE_BADGE_COLORS[application.source ?? ""] ?? "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300";
     const statusColor = STATUS_COLORS[application.currentStatus];
 
     const handleCardClick = (e: React.MouseEvent) => {
@@ -54,17 +54,17 @@ export const KanbanCardView = forwardRef<HTMLDivElement, KanbanCardViewProps>(
         {...attributes}
         {...listeners}
         onClick={handleCardClick}
-        className={`relative bg-white rounded-lg border p-3.5 shadow-sm transition-all duration-150 select-none group ${
+        className={`relative bg-white dark:bg-slate-800 rounded-lg border p-3.5 shadow-sm transition-all duration-150 select-none group ${
           isOverlay
             ? "cursor-grabbing shadow-lg border-indigo-400 rotate-2 scale-105"
             : isDragging
-            ? "opacity-50 border-slate-200 cursor-grabbing"
-            : "hover:shadow-md hover:border-slate-300 cursor-pointer"
+            ? "opacity-50 border-slate-200 dark:border-slate-700 cursor-grabbing"
+            : "hover:shadow-md dark:hover:shadow-slate-900/50 hover:border-slate-300 dark:hover:border-slate-600 border-slate-200 dark:border-slate-700 cursor-pointer"
         }`}
       >
         {/* Company + link */}
         <div className="flex items-start justify-between gap-2 mb-1.5">
-          <p className="text-sm font-semibold text-slate-800 leading-tight">
+          <p className="text-sm font-semibold text-slate-800 dark:text-slate-100 leading-tight">
             {application.company.name}
           </p>
           {application.jobUrl && (
@@ -73,7 +73,7 @@ export const KanbanCardView = forwardRef<HTMLDivElement, KanbanCardViewProps>(
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="shrink-0 text-slate-300 hover:text-indigo-500 transition-colors z-10"
+              className="shrink-0 text-slate-300 dark:text-slate-600 hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors z-10"
             >
               <ExternalLink className="w-3.5 h-3.5" />
             </Link>
@@ -81,7 +81,7 @@ export const KanbanCardView = forwardRef<HTMLDivElement, KanbanCardViewProps>(
         </div>
 
         {/* Role */}
-        <p className="text-xs text-slate-500 mb-3 leading-snug">
+        <p className="text-xs text-slate-500 dark:text-slate-400 mb-3 leading-snug">
           {application.role}
         </p>
 
@@ -98,7 +98,7 @@ export const KanbanCardView = forwardRef<HTMLDivElement, KanbanCardViewProps>(
 
           {/* Salary */}
           {salary && (
-            <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-50 text-slate-600">
+            <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-medium bg-slate-50 dark:bg-slate-700 text-slate-600 dark:text-slate-300">
               <MapPin className="w-2.5 h-2.5" />
               {salary}
             </span>
@@ -107,7 +107,7 @@ export const KanbanCardView = forwardRef<HTMLDivElement, KanbanCardViewProps>(
 
         {/* Footer: date */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1 text-[10px] text-slate-400">
+          <div className="flex items-center gap-1 text-[10px] text-slate-400 dark:text-slate-500">
             <Calendar className="w-3 h-3" />
             {formatDate(application.appliedAt)}
           </div>

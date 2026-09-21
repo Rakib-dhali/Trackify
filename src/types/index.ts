@@ -60,6 +60,7 @@ export interface Application {
   salaryMin?: number | null;
   salaryMax?: number | null;
   source?: string | null;
+  jobDescription?: string | null;
   appliedAt: string; // ISO date string
   createdAt: string;
   updatedAt: string;
@@ -79,6 +80,7 @@ export interface AddApplicationInput {
   salaryMin?: number;
   salaryMax?: number;
   source?: ApplicationSource;
+  jobDescription?: string;
 }
 
 // ─── Analytics API response ──────────────────────────────────────────────────

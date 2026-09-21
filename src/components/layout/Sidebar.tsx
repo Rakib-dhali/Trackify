@@ -44,7 +44,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       {/* Sidebar Content */}
       <aside 
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex flex-col w-64 bg-slate-900 border-r border-slate-800 transition-transform duration-300 ease-in-out md:static md:translate-x-0 shrink-0",
+          "fixed inset-y-0 left-0 z-50 flex flex-col w-64 bg-slate-900 dark:bg-slate-900 border-r border-slate-800 dark:border-slate-800 transition-transform duration-300 ease-in-out md:static md:translate-x-0 shrink-0",
           isOpen ? "translate-x-0 shadow-2xl" : "-translate-x-full"
         )}
       >

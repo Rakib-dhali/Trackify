@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto, Roboto_Mono } from "next/font/google";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -33,9 +34,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${roboto.variable} ${robotoMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.getItem('trackify-theme') === 'dark') {
+                  document.documentElement.classList.add('dark');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

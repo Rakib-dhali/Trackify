@@ -19,10 +19,10 @@ export default function ApplicationsPage() {
       {/* Header Row */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between shrink-0 gap-3">
         <div>
-          <h1 className="text-xl font-bold text-slate-800 tracking-tight">
+          <h1 className="text-xl font-bold text-slate-800 dark:text-white tracking-tight">
             Job Applications
           </h1>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">
             Manage and track all your applications through the pipeline
           </p>
         </div>
@@ -42,7 +42,7 @@ export default function ApplicationsPage() {
           <div className="flex items-center justify-center h-full">
             <div className="flex flex-col items-center gap-3">
               <div className="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin" />
-              <p className="text-sm text-slate-500">Loading applications...</p>
+              <p className="text-sm text-slate-500 dark:text-slate-400">Loading applications...</p>
             </div>
           </div>
         ) : (

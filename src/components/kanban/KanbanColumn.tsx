@@ -29,7 +29,7 @@ export function KanbanColumn({
       <div className="flex items-center justify-between mb-3 px-1">
         <div className="flex items-center gap-2">
           <span className={`w-2.5 h-2.5 rounded-full ${colors.dot}`} />
-          <h2 className="text-xs font-semibold text-slate-600 uppercase tracking-wide">
+          <h2 className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">
             {STATUS_LABELS[status]}
           </h2>
         </div>
@@ -50,7 +50,7 @@ export function KanbanColumn({
         ref={setNodeRef}
         className={cn(
           "flex flex-col gap-2.5 flex-1 min-h-0 overflow-y-auto rounded-xl p-2.5 transition-colors duration-150 scrollbar-none",
-          isOver ? "bg-indigo-50 ring-2 ring-indigo-300 ring-inset" : "bg-slate-100/60"
+          isOver ? "bg-indigo-50 dark:bg-indigo-950/30 ring-2 ring-indigo-300 dark:ring-indigo-700 ring-inset" : "bg-slate-100/60 dark:bg-slate-800/40"
         )}
       >
         <SortableContext
@@ -63,8 +63,8 @@ export function KanbanColumn({
         </SortableContext>
 
         {applications.length === 0 && (
-          <div className="flex items-center justify-center h-24 rounded-lg border-2 border-dashed border-slate-200 shrink-0">
-            <p className="text-xs text-slate-400">Drop here</p>
+          <div className="flex items-center justify-center h-24 rounded-lg border-2 border-dashed border-slate-200 dark:border-slate-700 shrink-0">
+            <p className="text-xs text-slate-400 dark:text-slate-500">Drop here</p>
           </div>
         )}
       </div>

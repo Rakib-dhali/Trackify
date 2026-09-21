@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import { useApplicationStore } from "@/store/useApplicationStore";
 import { STATUS_LABELS, ApplicationStatus } from "@/types";
+import { useThemeStore } from "@/store/useThemeStore";
 
 const STATUS_PIE_COLORS: Record<ApplicationStatus, string> = {
   APPLIED: "#3b82f6",
@@ -40,6 +41,7 @@ function CustomTooltip({ active, payload }: CustomTooltipProps) {
 
 export function StatusPieChart() {
   const applications = useApplicationStore((s) => s.applications);
+  const theme = useThemeStore((s) => s.theme);
 
   const counts = applications.reduce(
     (acc, app) => {
@@ -59,19 +61,19 @@ export function StatusPieChart() {
 
   if (data.length === 0) {
     return (
-      <div className="bg-white rounded-xl border border-slate-200 p-5 flex items-center justify-center h-full">
-        <p className="text-sm text-slate-400">No data yet</p>
+      <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-5 flex items-center justify-center h-full">
+        <p className="text-sm text-slate-400 dark:text-slate-500">No data yet</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-xl border border-slate-200 p-5">
+    <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-5">
       <div className="mb-4">
-        <h3 className="text-sm font-semibold text-slate-700">
+        <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-200">
           Status Breakdown
         </h3>
-        <p className="text-xs text-slate-400 mt-0.5">
+        <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">
           Current distribution across all statuses
         </p>
       </div>
@@ -94,7 +96,7 @@ export function StatusPieChart() {
           <Legend
             iconType="circle"
             iconSize={8}
-            wrapperStyle={{ fontSize: "11px", color: "#64748b" }}
+            wrapperStyle={{ fontSize: "11px", color: theme === "dark" ? "#94a3b8" : "#64748b" }}
           />
         </PieChart>
       </ResponsiveContainer>
