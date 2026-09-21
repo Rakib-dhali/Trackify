@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Sun, Moon } from "lucide-react";
 import { useThemeStore } from "@/store/useThemeStore";
 
@@ -8,7 +9,21 @@ interface ThemeToggleProps {
 }
 
 export function ThemeToggle({ className = "" }: ThemeToggleProps) {
+  const [mounted, setMounted] = useState(false);
   const { theme, toggleTheme } = useThemeStore();
+  
+  useEffect(() => {
+    const timer = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!mounted) {
+    // Return a skeleton that matches the size but has neutral styling to prevent layout shift
+    return (
+      <div className={`w-9 h-9 rounded-lg border border-transparent ${className}`} />
+    );
+  }
+
   const isDark = theme === "dark";
 
   return (

@@ -82,8 +82,8 @@ function Navbar() {
           <a href="#how-it-works" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
             How it works
           </a>
-          <a href="#pricing" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-            Pricing
+          <a href="#about" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+            About
           </a>
         </div>
 
@@ -138,11 +138,11 @@ function Navbar() {
             How it works
           </a>
           <a
-            href="#pricing"
+            href="#about"
             onClick={() => setMobileOpen(false)}
             className="block text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 py-2 border-b border-slate-100 dark:border-slate-800"
           >
-            Pricing
+            About
           </a>
           <div className="flex flex-col gap-2.5 pt-2">
             <Link
@@ -548,6 +548,51 @@ function Footer() {
   );
 }
 
+/* ────────────────────────────── About ────────────────────────────────────── */
+
+function AboutSection() {
+  return (
+    <section id="about" className="relative bg-white dark:bg-slate-900 py-20 sm:py-28 border-t border-slate-200/60 dark:border-slate-800/60">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="max-w-3xl mx-auto text-center"
+        >
+          <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 px-3 py-1 rounded-full border border-indigo-100 dark:border-indigo-800">
+            About the Project
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-4 mb-6">
+            Built for Job Seekers
+          </h2>
+          <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+            Trackify started as an open-source tool to help developers organize their job applications without relying on messy spreadsheets. We believe that tracking your career progress should be intuitive, fast, and free of clutter.
+          </p>
+          <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
+            By combining a visual kanban board with smart analytics, Trackify gives you the insights you need to refine your search and land interviews faster.
+          </p>
+          
+          {/* Author Badge */}
+          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm">
+            <span className="text-sm text-slate-500 dark:text-slate-400">Created by</span>
+            <a 
+              href="https://github.com/Rakib-dhali" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-sm font-bold text-slate-800 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+            >
+              <FaGithub className="w-4 h-4" />
+              Rakib Dhali
+            </a>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 /* ─────────────────────────── Landing Page ────────────────────────────────── */
 
 export default function LandingPage() {
@@ -557,6 +602,7 @@ export default function LandingPage() {
       <HeroSection />
       <FeaturesSection />
       <HowItWorksSection />
+      <AboutSection />
       <StatsSection />
       <CTASection />
       <Footer />

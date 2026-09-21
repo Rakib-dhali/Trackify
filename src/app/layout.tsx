@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     title: "Trackify - Job Application Tracker",
     description: "Organize your job search and land your dream job.",
   },
+  authors: [{ name: "Rakib Dhali" }],
+  creator: "Rakib Dhali",
+  publisher: "Rakib Dhali",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
