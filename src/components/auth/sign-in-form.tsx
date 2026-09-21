@@ -61,7 +61,7 @@ export function SignInForm() {
     <>
       {/* Error */}
       {error && (
-        <div className="flex items-center gap-2 px-4 py-3 mb-6 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300 text-[0.8125rem] animate-[shake_0.4s_cubic-bezier(0.36,0.07,0.19,0.97)_both]">
+        <div className="flex items-center gap-2 px-4 py-3 mb-6 rounded-xl bg-red-100 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-red-600 dark:text-red-300 text-[0.8125rem] animate-[shake_0.4s_cubic-bezier(0.36,0.07,0.19,0.97)_both]">
           <AlertCircle className="size-4 shrink-0" />
           {error}
         </div>
@@ -72,11 +72,11 @@ export function SignInForm() {
         type="button"
         onClick={handleGoogleSignIn}
         disabled={isBusy}
-        className="w-full py-3 px-4 mb-5 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/[0.15] rounded-xl text-slate-100 text-sm font-medium transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+        className="w-full py-3 px-4 mb-5 bg-white dark:bg-white/[0.04] hover:bg-slate-50 dark:hover:bg-white/[0.08] border border-slate-200 dark:border-white/[0.08] hover:border-slate-300 dark:hover:border-white/[0.15] rounded-xl text-slate-700 dark:text-slate-100 text-sm font-medium transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer shadow-sm"
       >
         {googleLoading ? (
           <span className="flex items-center justify-center gap-2">
-            <Loader2 className="size-[18px] animate-spin text-violet-400" />
+            <Loader2 className="size-[18px] animate-spin text-violet-500 dark:text-violet-400" />
             Connecting to Google...
           </span>
         ) : (
@@ -89,22 +89,22 @@ export function SignInForm() {
 
       {/* Divider */}
       <div className="relative flex items-center justify-center mb-5">
-        <div className="border-t border-white/[0.08] w-full" />
-        <span className="bg-transparent px-3 text-xs text-slate-400 uppercase tracking-wider font-medium shrink-0">
+        <div className="border-t border-slate-200 dark:border-white/[0.08] w-full" />
+        <span className="bg-transparent px-3 text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-medium shrink-0">
           or continue with email
         </span>
-        <div className="border-t border-white/[0.08] w-full" />
+        <div className="border-t border-slate-200 dark:border-white/[0.08] w-full" />
       </div>
 
       {/* Form */}
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         {/* Email */}
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="signin-email" className="text-[0.8125rem] font-medium text-slate-300 pl-0.5">
+          <label htmlFor="signin-email" className="text-[0.8125rem] font-medium text-slate-700 dark:text-slate-300 pl-0.5">
             Email address
           </label>
           <div className="relative flex items-center group">
-            <Mail className="absolute left-3.5 size-[18px] text-slate-500 pointer-events-none transition-colors group-focus-within:text-violet-400" />
+            <Mail className="absolute left-3.5 size-[18px] text-slate-400 dark:text-slate-500 pointer-events-none transition-colors group-focus-within:text-violet-500 dark:group-focus-within:text-violet-400" />
             <input
               id="signin-email"
               type="email"
@@ -114,18 +114,18 @@ export function SignInForm() {
               required
               disabled={isBusy}
               autoComplete="email"
-              className="w-full py-3 pl-11 pr-3.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-slate-100 text-sm outline-none placeholder:text-slate-600 transition-all duration-200 hover:border-white/[0.12] focus:bg-white/[0.06] focus:border-violet-500/50 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1),0_0_20px_rgba(139,92,246,0.05)] disabled:opacity-60"
+              className="w-full py-3 pl-11 pr-3.5 bg-white dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl text-slate-900 dark:text-slate-100 text-sm outline-none placeholder:text-slate-400 dark:placeholder:text-slate-600 transition-all duration-200 hover:border-slate-300 dark:hover:border-white/[0.12] focus:bg-slate-50 dark:focus:bg-white/[0.06] focus:border-violet-500 dark:focus:border-violet-500/50 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1),0_0_20px_rgba(139,92,246,0.05)] disabled:opacity-60"
             />
           </div>
         </div>
 
         {/* Password */}
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="signin-password" className="text-[0.8125rem] font-medium text-slate-300 pl-0.5">
+          <label htmlFor="signin-password" className="text-[0.8125rem] font-medium text-slate-700 dark:text-slate-300 pl-0.5">
             Password
           </label>
           <div className="relative flex items-center group">
-            <Lock className="absolute left-3.5 size-[18px] text-slate-500 pointer-events-none transition-colors group-focus-within:text-violet-400" />
+            <Lock className="absolute left-3.5 size-[18px] text-slate-400 dark:text-slate-500 pointer-events-none transition-colors group-focus-within:text-violet-500 dark:group-focus-within:text-violet-400" />
             <input
               id="signin-password"
               type={showPassword ? "text" : "password"}
@@ -136,12 +136,12 @@ export function SignInForm() {
               disabled={isBusy}
               autoComplete="current-password"
               minLength={8}
-              className="w-full py-3 pl-11 pr-11 bg-white/[0.04] border border-white/[0.08] rounded-xl text-slate-100 text-sm outline-none placeholder:text-slate-600 transition-all duration-200 hover:border-white/[0.12] focus:bg-white/[0.06] focus:border-violet-500/50 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1),0_0_20px_rgba(139,92,246,0.05)] disabled:opacity-60"
+              className="w-full py-3 pl-11 pr-11 bg-white dark:bg-white/[0.04] border border-slate-200 dark:border-white/[0.08] rounded-xl text-slate-900 dark:text-slate-100 text-sm outline-none placeholder:text-slate-400 dark:placeholder:text-slate-600 transition-all duration-200 hover:border-slate-300 dark:hover:border-white/[0.12] focus:bg-slate-50 dark:focus:bg-white/[0.06] focus:border-violet-500 dark:focus:border-violet-500/50 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1),0_0_20px_rgba(139,92,246,0.05)] disabled:opacity-60"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 p-1 rounded-md text-slate-500 hover:text-violet-400 hover:bg-white/[0.06] transition-all cursor-pointer"
+              className="absolute right-3 p-1 rounded-md text-slate-400 dark:text-slate-500 hover:text-violet-500 dark:hover:text-violet-400 hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-all cursor-pointer"
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
               {showPassword ? <EyeOff className="size-[18px]" /> : <Eye className="size-[18px]" />}
